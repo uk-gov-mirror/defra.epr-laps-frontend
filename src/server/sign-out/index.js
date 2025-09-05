@@ -7,6 +7,9 @@ export const signOut = {
       server.route({
         method: 'GET',
         path: '/sign-out',
+        options: {
+          auth: false
+        },
         ...signOutController
       })
     }

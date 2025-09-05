@@ -1,6 +1,9 @@
 import path from 'path'
 import hapi from '@hapi/hapi'
 import HapiI18n from 'hapi-i18n'
+import HapiCookie from '@hapi/cookie'
+import 'dotenv/config'
+// import * as msal from '@azure/msal-node'
 import { router } from './router.js'
 import { config } from '../config/config.js'
 import { pulse } from './common/helpers/pulse.js'
@@ -20,6 +23,25 @@ const __filename = fileURLToPath(import.meta.url)
 
 // Current directory path (equivalent to __dirname)
 const __dirname = path.dirname(__filename)
+
+// const msalConfig = {
+//   auth: {
+//     clientId: process.env.AZURE_B2C_CLIENT_ID,
+//     authority: `https://${process.env.AZURE_B2C_TENANT_NAME}.b2clogin.com/${process.env.AZURE_B2C_TENANT_NAME}/${process.env.AZURE_B2C_POLICY_NAME}`,
+//     clientSecret: process.env.AZURE_B2C_CLIENT_SECRET
+//   },
+//   system: {
+//     loggerOptions: {
+//       loggerCallback(loglevel, message) {
+//         console.log(message)
+//       },
+//       piiLoggingEnabled: false,
+//       logLevel: msal.LogLevel.Verbose
+//     }
+//   }
+// }
+
+// const cca = new msal.ConfidentialClientApplication(msalConfig)
 
 export async function createServer() {
   setupProxy()
@@ -70,6 +92,25 @@ export async function createServer() {
       cookieName: 'locale'
     }
   })
+
+  await server.register(HapiCookie)
+
+  // server.auth.strategy('session', 'cookie', {
+  //   cookie: {
+  //     name: 'b2c-session',
+  //     password: process.env.EXPRESS_SESSION_SECRET,
+  //     isSecure: process.env.NODE_ENV === 'production'
+  //   },
+  //   redirectTo: '/sign-out',
+  //   validate: async (request, session) => {
+  //     if (session.isAuthenticated) {
+  //       return { valid: true, credentials: session };
+  //     }
+  //     return { valid: false };
+  //   }
+  // });
+
+  // server.auth.default('session')
 
   server.ext('onRequest', (request, h) => {
     const lang = request.query.lang || 'en'
