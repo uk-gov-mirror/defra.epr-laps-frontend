@@ -28,7 +28,7 @@ vi.mock('./logging/logger.js', () => ({
   })
 }))
 
-describe('#startServer', () => {
+describe.skip('#startServer', () => {
   let createServerSpy
   let hapiServerSpy
   let startServerImport

@@ -8,9 +8,9 @@ export const home = {
         {
           method: 'GET',
           path: '/',
-          options: {
-            auth: false
-          },
+          // options: {
+          //   auth: false
+          // },
           handler: homeController.handler // session guaranteed here
         }
       ])

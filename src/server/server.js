@@ -95,22 +95,22 @@ export async function createServer() {
 
   await server.register(HapiCookie)
 
-  // server.auth.strategy('session', 'cookie', {
-  //   cookie: {
-  //     name: 'b2c-session',
-  //     password: process.env.EXPRESS_SESSION_SECRET,
-  //     isSecure: process.env.NODE_ENV === 'production'
-  //   },
-  //   redirectTo: '/sign-out',
-  //   validate: async (request, session) => {
-  //     if (session.isAuthenticated) {
-  //       return { valid: true, credentials: session };
-  //     }
-  //     return { valid: false };
-  //   }
-  // });
+  server.auth.strategy('session', 'cookie', {
+    cookie: {
+      name: 'b2c-session',
+      password: process.env.EXPRESS_SESSION_SECRET,
+      isSecure: process.env.NODE_ENV === 'production'
+    },
+    redirectTo: '/sign-out',
+    validate: async (request, session) => {
+      if (session.isAuthenticated) {
+        return { valid: true, credentials: session }
+      }
+      return { valid: false }
+    }
+  })
 
-  // server.auth.default('session')
+  server.auth.default('session')
 
   server.ext('onRequest', (request, h) => {
     const lang = request.query.lang || 'en'
