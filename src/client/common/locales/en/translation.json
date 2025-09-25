@@ -56,5 +56,14 @@
   "date": "Date",
   "document-name": "Document name",
   "download": "Download",
-  "view-(opens-in-": "View (opens in a new tab)"
+  "view-(opens-in-": "View (opens in a new tab)",
+  "help": "Help",
+  "privacy": "Privacy",
+  "cookies": "Cookies",
+  "accessibility-s": "Accessibility statement",
+  "contact": "Contact",
+  "terms-and-condi": "Terms and conditions",
+  "government-digi": "Government Digital Service",
+  "all-content-is-": "All content is available under the Open Government Licence v3.0 except where otherwise stated",
+  "crown-copyright": "Crown copyright"
 }
